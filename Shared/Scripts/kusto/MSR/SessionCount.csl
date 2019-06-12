@@ -16,6 +16,7 @@ dominoinvocation
         "Lab")
     | extend Customer = 
         case(
+            EnvironmentShort contains "APEX", "APEX",
             EnvironmentShort contains "Office", "Office",
             EnvironmentShort contains "OSGTools", "OsgTools",
             EnvironmentShort contains "OSG", "WDG",
@@ -35,6 +36,3 @@ dominoinvocation
 | extend U = strcat(User, UserName), Month = startofmonth(EventInfo_Time)   
 | summarize UniqueSessions = dcount(UniqueSession), UniqueUsers = dcount(U) by Month, Customer, Infra
 | order by Month asc nulls last, Customer, Infra
-
- 
- 
